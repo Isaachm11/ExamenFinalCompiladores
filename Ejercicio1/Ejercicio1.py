@@ -79,7 +79,7 @@ while True:
     next_state = actions[actual_state][index_of_symbol]
     
     if next_state == 'accept':
-        print("Éxito")
+        print(states_stack, next_state)
         break
         
     elif next_state == '':
@@ -100,6 +100,8 @@ while True:
         reduction = new + '->' + old
         input_string = input_string.replace(old, new, 1)
         
+        print(states_stack, reduction)
+        
         if pop_amount>1:
             i = i - pop_amount + 1
             
@@ -114,5 +116,4 @@ while True:
         actual_state = states_stack[-1]
         
         next_state = actions[actual_state][index_of_symbol]
-        print(states_stack, reduction)
 

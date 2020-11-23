@@ -54,7 +54,6 @@ with open(productions_file_name, 'r') as file:
 
     for i in range(len(lines)):
         splited_line = lines[i].split()
-        print(splited_line[2].split(','))
         production = splited_line[2].split(',')[0]
         number_of_pops = splited_line[2].split(',')[1]
         productions.append((splited_line[0], production, int(number_of_pops)))
@@ -84,7 +83,7 @@ while True:
     next_state = actions[actual_state][index_of_symbol]
     
     if next_state == 'accept':
-        print("Éxito")
+        print(input_list, states_stack, next_state)
         break
         
     elif next_state == '':
@@ -105,6 +104,7 @@ while True:
         reduction = new + '->' + old
         input_string = input_string.replace(old, new, 1)
         
+        print(input_list, states_stack, reduction)
         
         if pop_amount>1:
             move_i_places = pop_amount-1
@@ -124,7 +124,6 @@ while True:
         actual_state = states_stack[-1]
         
         next_state = actions[actual_state][index_of_symbol]
-        print(input_list, states_stack, reduction)
 
 
 # In[ ]:
