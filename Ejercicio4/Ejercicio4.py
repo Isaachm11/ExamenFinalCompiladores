@@ -1,7 +1,8 @@
 # Command to run the program
-# python Ejercicio1.py action1.csv goto1.csv producciones1.txt entrada1.txt
+# python Ejercicio4.py action1.csv goto1.csv producciones1.txt entrada1.txt
 #!/usr/bin/env python
 # coding: utf-8
+
 
 import csv
 import collections
@@ -44,6 +45,7 @@ for i in range(len(actions)):
         map_symbols_actions[i+1, symbols[j]] = actions[i][j]
 
 
+
 # ## Leyendo las producciones
 productions = []
 productions.append(tuple())
@@ -52,13 +54,12 @@ with open(productions_file_name, 'r') as file:
 
     for i in range(len(lines)):
         splited_line = lines[i].split()
+        print(splited_line[2].split(','))
         production = splited_line[2].split(',')[0]
         number_of_pops = splited_line[2].split(',')[1]
         productions.append((splited_line[0], production, int(number_of_pops)))
-productions
 
 
-# ## Important elements to consider when iterating through the input
 # ## Reading the input
 def read_input():
     f = open(input_file_name, "r")
@@ -68,9 +69,13 @@ def read_input():
     return input_string
 
 input_string = read_input()
+input_list = list(input_string)
+
 states_stack = []
 states_stack.append(0)
+
 i = 0
+number_of_pops_input_list = 0
 
 while True:
     symbol = input_string[i]
@@ -87,7 +92,7 @@ while True:
         break
 
     elif next_state[0]=='s':
-        print(states_stack, next_state)
+        print(input_list, states_stack, next_state)
         states_stack.append(int(next_state[1:]))
         
         i += 1
@@ -100,13 +105,18 @@ while True:
         reduction = new + '->' + old
         input_string = input_string.replace(old, new, 1)
         
+        
         if pop_amount>1:
-            i = i - pop_amount + 1
+            move_i_places = pop_amount-1
+            i = i - move_i_places
+            for _ in range(move_i_places):
+                input_list.pop(i-1)
             
         for _ in range(pop_amount):
             states_stack.pop()
-            
-#         Agarra el último de la lista
+        
+        input_list[i-1] = new 
+
         reduction_state = states_stack[-1]
         goto = gotos[new][reduction_state]
         
@@ -114,5 +124,11 @@ while True:
         actual_state = states_stack[-1]
         
         next_state = actions[actual_state][index_of_symbol]
-        print(states_stack, reduction)
+        print(input_list, states_stack, reduction)
+
+
+# In[ ]:
+
+
+
 
