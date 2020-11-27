@@ -12,9 +12,9 @@ Se tienen las siguientes variables destacadas:
 ```python
 ['+', '*', 'a', '$']
 ```
-$\begin{bmatrix}
+$$\begin{bmatrix}
       '+' & '*' & 'a' & '\$'
-\end{bmatrix}$
+\end{bmatrix}$$
 
 
 - **actions**: Una mariz de las acciones El cual nos ayuda a saber dependiendo del estado que nos encontremos en el stack, y el índice del símbolo, que realizar. Un ejemplo de matriz utilizando el archivo action1.csv es el siguiente:
